@@ -11,6 +11,7 @@ fetch("https://api.myjson.com/bins/zyv02", {
   .then(function(books) {
     console.log(books);
     var books = books.books;
+
     bookcards(books, "library");
     document.getElementById("forsearch").addEventListener("keyup", function() {
       bookSearch(books);
@@ -60,6 +61,7 @@ function bookcards(array, id) {
     flipcard.append(flipcardinner);
     body.append(flipcard);
   }
+
   document.getElementById("load-icon").style.display = "none";
 }
 
@@ -68,6 +70,8 @@ function bookcards(array, id) {
 function bookSearch(array) {
   var input = document.getElementById("forsearch");
   var filteredArr = [];
+  let noresult = document.getElementById("noresults");
+  noresult.style.display = "none";
 
   filteredArr = array.filter(
     arr =>
@@ -78,4 +82,8 @@ function bookSearch(array) {
   console.log(filteredArr);
 
   bookcards(filteredArr, "library");
+
+  if (filteredArr == "") {
+    noresult.style.display = "block";
+  }
 }

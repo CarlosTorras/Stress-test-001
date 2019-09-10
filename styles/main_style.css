@@ -43,12 +43,12 @@ input {
 /* Books cards flip */
 .flip-card-front > img {
   /* object-fit: contain; */
-  width: 320px;
+  width: 300px;
   height: 420px;
 }
 .flip-card {
   background-color: transparent;
-  width: 320px;
+  width: 300px;
   height: 420px;
   margin: 5px;
   /* Remove perspective if you don't want the 3D effect */
@@ -181,4 +181,13 @@ button:hover {
   100% {
     transform: translate(19px, 0);
   }
+}
+
+/* Noresult message */
+
+#noresults {
+  text-align: center;
+  font-size: 1.1em;
+  width: 50%;
+  margin: 0 auto;
 }
