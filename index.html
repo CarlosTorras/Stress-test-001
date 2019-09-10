@@ -12,7 +12,7 @@
     <title>Ubiqum book store</title>
   </head>
   <body>
-    <div>
+    <div id="app">
       <header>
         <div id="logo" class="logo">
           <img src="./img/logo.PNG" alt="Ubiqum Bookstore Logo" />
@@ -20,13 +20,37 @@
         <div id="searchbox">
           <input
             type="text"
+            v-model="search"
             name="searchengine"
             id="forsearch"
             placeholder="Search your book"
           />
         </div>
       </header>
-      <div id="load-icon">
+      <div v-if="loading===false" id="library" class="container">
+        <div v-for="book in getBooks" class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img v-bind:src="book.cover" alt="book cover" />
+            </div>
+            <div class="flip-card-back">
+              <h2 class="title">{{ book.title }}</h2>
+              <p class="info">{{ book.description }} {{ book.language }}</p>
+              <a
+                v-bind:href="book.detail"
+                data-fancybox="gallery"
+                v-bind:data-caption="book.title"
+              >
+                <button>More Info</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div v-if="getBooks==''" id="noresults">
+          THERE ARE NO BOOKS MATCHING YOUR SEARCH.
+        </div>
+      </div>
+      <div v-if="loading===true" id="load-icon">
         <div class="lds-ellipsis">
           <div></div>
           <div></div>
@@ -34,11 +58,8 @@
           <div></div>
         </div>
       </div>
-      <div id="library" class="container row"></div>
-      <div id="noresults">
-        THERE ARE NO BOOKS MATCHING YOUR SEARCH.
-      </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="./javascript/library.js"></script>
